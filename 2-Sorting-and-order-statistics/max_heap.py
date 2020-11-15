@@ -1,5 +1,3 @@
-from collections import deque
-
 # O(log n), maintains the max-heap property
 # assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are maxheaps, 
 # but that A[i] might be smaller than its children, thus violating the max-heap
@@ -35,7 +33,7 @@ def heapsort(arr):
     build_heap(arr)
     res = []
     while len(arr) > 0:
-        res.insert(0, arr.pop())
+        res.insert(0, arr.pop(0))
         heapify(1, arr)
     return res
 
