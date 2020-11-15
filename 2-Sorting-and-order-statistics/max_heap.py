@@ -1,3 +1,5 @@
+from collections import deque
+
 # O(log n), maintains the max-heap property
 # assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are maxheaps, 
 # but that A[i] might be smaller than its children, thus violating the max-heap
@@ -7,27 +9,35 @@ def heapify(i, arr):
     left_index = left(i, arr)
     right_index = right(i, arr)
 
-    if left_index <= len(arr) and arr[left_index] > arr[i]:
-        swap(i, left_index, arr)
-        return heapify(left_index, arr)
-    elif right_index <= len(arr) and arr[right_index] > arr[i]:
-        swap(i, right_index, arr)
-        return heapify(right_index, arr)
-    else:
-        return arr
+    largest = i
+    if left_index <= len(arr) and arr[left_index-1] > arr[largest-1]:
+        largest = left_index
+
+    if right_index <= len(arr) and arr[right_index-1] > arr[largest-1]:
+        largest = right_index
+
+    if largest != i:
+        swap(i-1, largest-1, arr)
+        heapify(largest, arr)
 
 def swap(x, y, arr):
-    arr[x] += arr[y]
-    arr[y] = arr[x] - arr[y]
-    arr[x] -= arr[y]
+    tmp = arr[y]
+    arr[y] = arr[x]
+    arr[x] = tmp
 
-    # O(n), produces a maxheap from an unordered input array
+# O(n), produces a maxheap from an unordered input array
 def build_heap(arr):
-    pass
+    for i in range(len(arr) // 2, 0, -1):
+        heapify(i, arr)
 
-    # O(n lg n), sorts an array in place
+# O(n lg n), sorts an array in place
 def heapsort(arr):
-    pass
+    build_heap(arr)
+    res = []
+    while len(arr) > 0:
+        res.insert(0, arr.pop())
+        heapify(1, arr)
+    return res
 
 # O(lg n), allow the heap data structure to implement a priority queue
 # MAX-HEAP-INSERT
@@ -58,6 +68,16 @@ def right(i, arr):
 
 
 def test_heapify():
-    arr = [2, 16, 14, 12, 8, 7, 9, 3, 4, 1]
-    res = heapify(0, arr)
-    assert res == [16, 14, 8, 12, 4, 7, 9, 3, 2, 1]
+    arr = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    heapify(2, arr)
+    assert arr == [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+
+def test_build_heap():
+    arr = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
+    build_heap(arr)
+    assert arr == [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+
+def test_heapsort():
+    arr = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
+    res = heapsort(arr)
+    assert res == [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
