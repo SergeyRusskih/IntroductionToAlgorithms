@@ -18,7 +18,7 @@ def heapify(i, arr):
 
 def swap(x, y, arr):
     arr[x] += arr[y]
-    arr[y] -= arr[x]
+    arr[y] = arr[x] - arr[y]
     arr[x] -= arr[y]
 
     # O(n), produces a maxheap from an unordered input array
@@ -58,6 +58,6 @@ def right(i, arr):
 
 
 def test_heapify():
-    arr = [2, 14, 12, 8, 7, 9, 3, 16, 4, 1]
+    arr = [2, 16, 14, 12, 8, 7, 9, 3, 4, 1]
     res = heapify(0, arr)
-    assert res == [16, 14, 12, 8, 7, 9, 3, 2, 4, 1]
+    assert res == [16, 14, 8, 12, 4, 7, 9, 3, 2, 1]
