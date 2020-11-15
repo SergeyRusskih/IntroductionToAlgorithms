@@ -38,17 +38,23 @@ def heapsort(arr):
     return res
 
 # O(lg n), allow the heap data structure to implement a priority queue
-# MAX-HEAP-INSERT
-def insert():
-    pass
+# insert new item into priority queue
+def insert(arr, key):
+    arr.isert(0, key)
+    heapify(1, arr)
 
-# HEAP-EXTRACT-MAX
-def extract():
-    pass
+# returns the max value and removes it from the heap
+def extract_max(arr):
+    max = arr.pop(0)
+    heapify(1, arr)
+    return max
 
-# HEAP-INCREASE-KEY
-def increase_key():
-    pass
+# increases the priority of the element
+def increase_key(arr, i, key):
+    arr[i-1] = key
+    while i > 1 and arr[i-1] > arr[parent(i, arr)-1]:
+        swap(i-1, parent(i, arr)-1, arr)
+        i = parent(i, arr)
 
 # HEAP-MAXIMUM
 def heap_maximum():
@@ -79,3 +85,8 @@ def test_heapsort():
     arr = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
     res = heapsort(arr)
     assert res == [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+
+def test_increase_key():
+    arr = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+    increase_key(arr, 9, 15)
+    assert arr == [16, 15, 10, 14, 7, 9, 3, 2, 8, 1]
