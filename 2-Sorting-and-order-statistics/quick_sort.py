@@ -1,3 +1,4 @@
+# any comparison based sort algorithm requires at least O(n log n) in worst case
 def quick_sort(arr, i, j):
     if i < j:
         p = partition(arr, i, j)
