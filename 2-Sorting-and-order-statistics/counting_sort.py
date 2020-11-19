@@ -1,5 +1,5 @@
 # Counting sort assumes that each of the n input elements is an integer in the range
-# 0 to k, for some integer k. When k D O.n/, the sort runs in ‚.n/ time
+# 0 to k, for some integer k. When k = O(n), the sort runs in O(n) time
 def counting_sort(arr: list, max: int):
     count_arr = [0] * (max+1)
     for item in arr:
