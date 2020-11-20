@@ -8,7 +8,7 @@ def kmp(str, pattern):
             index = lps_arr[index] - 1
 
         if str[i] == pattern[index + 1]:
-            index +=1
+            index += 1
 
         if index == len(pattern) - 1:
             matches += 1
