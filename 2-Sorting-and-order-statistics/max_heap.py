@@ -1,8 +1,8 @@
 # O(log n), maintains the max-heap property
 # assumes that the binary trees rooted at LEFT(i) and RIGHT(i) are maxheaps, 
 # but that A[i] might be smaller than its children, thus violating the max-heap
-# property. HEAPIFY lets the value at A[i] “float down” in the max-heap so
-#that the subtree rooted at index i obeys the max-heap property.
+# property. HEAPIFY lets the value at A[i] 'float down' in the max-heap so
+# that the subtree rooted at index i obeys the max-heap property.
 def heapify(i, arr):
     left_index = left(i, arr)
     right_index = right(i, arr)
