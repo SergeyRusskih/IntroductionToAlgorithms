@@ -4,8 +4,8 @@
 # property. HEAPIFY lets the value at A[i] 'float down' in the max-heap so
 # that the subtree rooted at index i obeys the max-heap property.
 def heapify(i, arr):
-    left_index = left(i, arr)
-    right_index = right(i, arr)
+    left_index = left(i)
+    right_index = right(i)
 
     largest = i
     if left_index <= len(arr) and arr[left_index-1] > arr[largest-1]:
@@ -53,20 +53,20 @@ def extract_max(arr):
 def increase_key(arr, i, key):
     arr[i-1] = key
     while i > 1 and arr[i-1] > arr[parent(i, arr)-1]:
-        swap(i-1, parent(i, arr)-1, arr)
+        swap(i-1, parent(i)-1, arr)
         i = parent(i, arr)
 
 # HEAP-MAXIMUM
 def heap_maximum():
     pass
 
-def parent(i, arr):
+def parent(i):
     return i // 2
 
-def left(i, arr):
+def left(i):
     return 2 * i
 
-def right(i, arr):
+def right(i):
     return (2 * i) + 1
 
 
